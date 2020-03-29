@@ -1,4 +1,13 @@
-import {GET_LOGS, SET_LOADING, LOGS_ERROR, Add_LOGS} from './types';
+import {
+    GET_LOGS,
+    SET_LOADING,
+    LOGS_ERROR,
+    Add_LOGS,
+    DELETE_LOGS,
+    SET_CURRENT,
+    CLEAR_CURRENT,
+    UPDATE_LOG
+} from './types';
 
 export const getLogs = () => async dispatch => {
     try{
@@ -29,6 +38,56 @@ export const addLog = (log) => async dispatch => {
         const data = await res.json();
         dispatch({
             type: Add_LOGS,
+            payload: data
+        })
+    }catch (e) {
+        dispatch({
+            type: LOGS_ERROR,
+            payload: e.response.data
+        })
+    }
+};
+export const setCurrent = log => {
+    return {
+        type: SET_CURRENT,
+        payload: log
+    }
+};
+export const clearCurrent = () => {
+    return {
+        type: CLEAR_CURRENT
+    }
+};
+export const deleteLog = id => async dispatch => {
+    try{
+        setLoaoding();
+        await fetch(`/logs/${id}`, {
+            method: 'DELETE'
+        });
+        dispatch({
+            type: DELETE_LOGS,
+            payload: id
+        })
+    }catch (e) {
+        dispatch({
+            type: LOGS_ERROR,
+            payload: e.response.data
+        })
+    }
+};
+export const updateLog = log => async dispatch => {
+    try{
+        setLoaoding();
+        const res = await fetch(`/logs/${log.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(log),
+            headers: {
+                'Content-TYpe': 'application/json'
+            }
+        });
+        const data = res.json();
+        dispatch({
+            type: UPDATE_LOG,
             payload: data
         })
     }catch (e) {
