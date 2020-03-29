@@ -20,8 +20,14 @@
       "attention": false,
       "date": "09-12-2014",
       "tech": "Larry King"
+    },
+    {
+      "message": "changed network used by technician",
+      "attention": false,
+      "tech": "John Mc Cormik",
+      "data": "2020-03-29T20:59:54.365Z",
+      "id": 4
     }
-
   ],
   "techs": [
     {
