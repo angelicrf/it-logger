@@ -3,7 +3,7 @@ import {GET_TECHS, ADD_TECHS, DELETE_TECHS, SET_LOADING, TECHS_ERROR} from "./ty
 export const getTechs = () => async dispatch => {
     try{
         setLoaoding();
-        const res = await fetch('/techs');
+        const res = await fetch('/api/techs');
         const data = await res.json();
         dispatch({
             type: GET_TECHS,
@@ -19,7 +19,7 @@ export const getTechs = () => async dispatch => {
 export const addTechs = tech => async dispatch => {
     try{
         setLoaoding();
-        const res = await fetch('/techs',{
+        const res = await fetch('/api/techs',{
             method: 'POST',
             body:JSON.stringify(tech),
             headers: {
@@ -41,7 +41,7 @@ export const addTechs = tech => async dispatch => {
 export const deleteTechs = id => async dispatch => {
     try{
         setLoaoding();
-        await fetch(`/techs/${id}`,{
+        await fetch(`/api/techs/${id}`,{
             method: 'DELETE'
         });
         dispatch({

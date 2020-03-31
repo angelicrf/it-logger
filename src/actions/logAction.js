@@ -12,7 +12,7 @@ import {
 export const getLogs = () => async dispatch => {
     try{
         setLoaoding();
-        const res = await fetch('/logs');
+        const res = await fetch('/api/logs');
         const data = await res.json();
         dispatch({
             type: GET_LOGS,
@@ -28,7 +28,7 @@ export const getLogs = () => async dispatch => {
 export const addLog = (log) => async dispatch => {
     try{
         setLoaoding();
-        const res = await fetch('/logs', {
+        const res = await fetch('/api/logs', {
             method: 'POST',
             body:JSON.stringify(log),
             headers: {
@@ -61,7 +61,7 @@ export const clearCurrent = () => {
 export const deleteLog = id => async dispatch => {
     try{
         setLoaoding();
-        await fetch(`/logs/${id}`, {
+        await fetch(`/api/logs/${id}`, {
             method: 'DELETE'
         });
         dispatch({
@@ -78,7 +78,7 @@ export const deleteLog = id => async dispatch => {
 export const searchLog = text => async dispatch => {
     try{
         setLoaoding();
-        const res = await fetch(`/logs/?q=${text}`);
+        const res = await fetch(`/api/logs/?q=${text}`);
         const data = await res.json();
         dispatch({
             type: SEARCH_LOGS,
@@ -94,7 +94,7 @@ export const searchLog = text => async dispatch => {
 export const updateLog = log => async dispatch => {
     try{
         setLoaoding();
-        const res = await fetch(`/logs/${log.id}`, {
+        const res = await fetch(`/api/logs/${log.id}`, {
             method: 'PUT',
             body: JSON.stringify(log),
             headers: {
